@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClimaVolt — Climatização & Elétrica Industrial e Comercial</title>
+<meta name="description" content="Instalação e manutenção de ar condicionado, elétrica industrial e comercial. Atendimento técnico ágil com garantia para empresas, indústrias e comércios.">
+<script>document.documentElement.className += ' js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        navy:'#0A2540', navy2:'#0E3155', brand:'#1B6CB5', brandsoft:'#3E8FD4',
+        ice:'#E9F2FA', ice2:'#D7E7F5', amber:'#F7941E', amberdeep:'#E07C08',
+        ink:'#14202E', muted:'#5C6E80', line:'#DCE6F0', bgsoft:'#F5F8FC'
+      },
+      fontFamily:{ display:['"Barlow Condensed"','sans-serif'], sans:['Inter','sans-serif'] },
+      maxWidth:{ content:'1180px' },
+      boxShadow:{ soft:'0 18px 50px -22px rgba(10,37,64,.35)', card:'0 8px 24px -14px rgba(10,37,64,.28)' },
+      keyframes:{
+        flow:{ to:{ strokeDashoffset:'-180' } },
+        vent:{ '0%,100%':{ width:'100%', opacity:'.6' }, '50%':{ width:'74%', opacity:'1' } },
+        pulse2:{ '0%':{ boxShadow:'0 0 0 0 rgba(37,211,102,.5)' }, '70%':{ boxShadow:'0 0 0 16px rgba(37,211,102,0)' }, '100%':{ boxShadow:'0 0 0 0 rgba(37,211,102,0)' } }
+      },
+      animation:{ flow:'flow 9s linear infinite', vent:'vent 2.6s ease-in-out infinite', pulse2:'pulse2 2.4s infinite' }
+    }}
+  }
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:#F5F8FC;color:#14202E}
+  .display{font-family:'Barlow Condensed',sans-serif}
+  .eyebrow{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.22em;font-weight:600}
+  .eyebrow::before{content:"";width:30px;height:2px;background:#F7941E;display:inline-block;margin-right:10px;vertical-align:middle}
+  .eyebrow.center::before{width:24px}
+  /* reveal só esconde quando há JS; failsafe garante exibição */
+  .reveal{transition:opacity .6s ease, transform .6s ease}
+  .js .reveal{opacity:0;transform:translateY(26px)}
+  .reveal.in{opacity:1;transform:none}
+  .is-hidden{display:none !important}
+  .scrolled-shadow{box-shadow:0 8px 28px -20px rgba(10,37,64,.5)}
+  .rev-track{display:flex;transition:transform .5s ease}
+  .mm{transform:translateY(-100%);transition:transform .35s;visibility:hidden}
+  .mm.open{transform:translateY(0);visibility:visible}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .js .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<!-- ===== TOP BAR ===== -->
+<div class="hidden md:block bg-navy text-ice/90 text-sm">
+  <div class="max-w-content mx-auto px-5 h-10 flex items-center justify-between">
+    <p class="display tracking-wide uppercase text-xs">Instalação · Manutenção · Ar Condicionado · Elétrica Industrial e Comercial</p>
+    <div class="flex items-center gap-5">
+      <span class="flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#F7941E" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>Seg–Sex 08h–18h · Sáb 08h–12h</span>
+      <a href="#" class="hover:text-amber transition">Instagram</a>
+      <a href="#" class="hover:text-amber transition">Facebook</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="top" class="sticky top-0 z-50 bg-bgsoft/90 backdrop-blur-md border-b border-line transition-shadow" data-header style="background:rgba(245,248,252,.92)">
+  <div class="max-w-content mx-auto px-5 h-[74px] flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3" aria-label="ClimaVolt - início">
+      <span class="w-11 h-11 rounded-xl grid place-items-center flex-none" style="background:linear-gradient(135deg,#0A2540,#1B6CB5)">
+        <svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#F7941E"/></svg>
+      </span>
+      <span class="leading-none">
+        <b class="display block text-2xl font-extrabold tracking-wide uppercase text-navy">ClimaVolt</b>
+        <span class="display text-[.62rem] tracking-[.26em] uppercase text-muted font-semibold">Climatização & Elétrica</span>
+      </span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8">
+      <a href="#servicos" class="text-[.95rem] font-medium text-ink hover:text-brand transition">Serviços</a>
+      <a href="#sobre" class="text-[.95rem] font-medium text-ink hover:text-brand transition">Quem Somos</a>
+      <a href="#galeria" class="text-[.95rem] font-medium text-ink hover:text-brand transition">Projetos</a>
+      <a href="#avaliacoes" class="text-[.95rem] font-medium text-ink hover:text-brand transition">Avaliações</a>
+      <a href="#contato" class="text-[.95rem] font-medium text-ink hover:text-brand transition">Contato</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href="tel:+5500000000000" class="hidden xl:flex items-center gap-2 display font-bold text-navy text-[1.05rem]">
+        <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="#F7941E"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1l-2.2 2.3Z"/></svg>
+        (00) 0000-0000
+      </a>
+      <a href="#contato" class="hidden sm:inline-flex items-center display uppercase tracking-wider font-bold text-[1rem] px-6 py-3 rounded-lg text-[#3a2403] hover:-translate-y-0.5 transition" style="background:#F7941E;box-shadow:0 10px 24px -10px rgba(247,148,30,.7)">Orçamento</a>
+      <button data-burger class="lg:hidden w-11 h-11 rounded-lg flex flex-col gap-[5px] items-center justify-center" aria-label="Abrir menu" aria-expanded="false">
+        <span class="w-6 h-[2.5px] rounded transition-all" style="background:#0A2540" data-bar></span>
+        <span class="w-6 h-[2.5px] rounded transition-all" style="background:#0A2540" data-bar></span>
+        <span class="w-6 h-[2.5px] rounded transition-all" style="background:#0A2540" data-bar></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mm fixed inset-0 z-[55] flex flex-col items-center justify-center gap-2 lg:hidden" data-mm style="background:#0A2540">
+  <a href="#servicos" class="display uppercase text-3xl font-bold text-white hover:text-amber transition">Serviços</a>
+  <a href="#sobre" class="display uppercase text-3xl font-bold text-white hover:text-amber transition">Quem Somos</a>
+  <a href="#galeria" class="display uppercase text-3xl font-bold text-white hover:text-amber transition">Projetos</a>
+  <a href="#avaliacoes" class="display uppercase text-3xl font-bold text-white hover:text-amber transition">Avaliações</a>
+  <a href="#contato" class="display uppercase text-3xl font-bold text-white hover:text-amber transition">Contato</a>
+  <a href="#contato" class="mt-4 display uppercase tracking-wider font-bold px-6 py-3 rounded-lg text-[#3a2403]" style="background:#F7941E">Solicitar Orçamento</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="relative overflow-hidden text-white" style="background:radial-gradient(1100px 600px at 78% -10%,rgba(27,108,181,.55),transparent 60%),linear-gradient(160deg,#0A2540 0%,#0E3155 55%,#0c2c4d 100%)">
+  <svg class="absolute inset-0 w-full h-full opacity-50 pointer-events-none" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
+    <path class="animate-flow" fill="none" stroke="rgba(126,180,228,.5)" stroke-width="1.4" stroke-dasharray="7 11" d="M-50 120 C 300 60, 500 200, 800 130 S 1300 160, 1300 160"/>
+    <path class="animate-flow" fill="none" stroke="rgba(126,180,228,.5)" stroke-width="1.4" stroke-dasharray="7 11" d="M-50 260 C 300 200, 520 340, 820 270 S 1300 300, 1300 300"/>
+    <path class="animate-flow" fill="none" stroke="rgba(126,180,228,.5)" stroke-width="1.4" stroke-dasharray="7 11" d="M-50 400 C 300 340, 540 480, 840 410 S 1300 440, 1300 440"/>
+  </svg>
+  <div class="max-w-content mx-auto px-5 grid lg:grid-cols-[1.05fr_.95fr] gap-10 items-center py-16 lg:min-h-[600px] relative z-10">
+    <div>
+      <span class="eyebrow text-brandsoft text-[.86rem]">Climatização • Elétrica Industrial • Comercial</span>
+      <h1 class="display uppercase font-extrabold leading-[1.02] text-5xl sm:text-6xl lg:text-[4.4rem] mt-4 mb-5">
+        Ar <span style="color:#9fcdf0">na medida certa.</span><br>Energia <span class="text-amber">sob controle.</span>
+      </h1>
+      <p class="text-[1.15rem] text-ice/90 max-w-lg mb-7">Instalação e manutenção de ar condicionado e projetos elétricos industriais e comerciais. Equipe técnica certificada, atendimento ágil e serviço com garantia.</p>
+      <div class="flex flex-wrap gap-3.5 mb-8">
+        <a href="#contato" class="display uppercase tracking-wider font-bold text-[1.02rem] px-7 py-3.5 rounded-lg text-[#3a2403] hover:-translate-y-0.5 transition" style="background:#F7941E;box-shadow:0 10px 24px -10px rgba(247,148,30,.7)">Solicitar Orçamento</a>
+        <a href="#servicos" class="display uppercase tracking-wider font-bold text-[1.02rem] px-7 py-3.5 rounded-lg border-2 border-white/45 text-white hover:border-white hover:bg-white/10 transition">Ver Serviços</a>
+      </div>
+      <div class="flex flex-wrap gap-7 border-t border-white/15 pt-6">
+        <div><b class="display block text-3xl font-extrabold leading-none">+12</b><span class="text-xs uppercase tracking-wider text-ice/70">Anos de mercado</span></div>
+        <div><b class="display block text-3xl font-extrabold leading-none">+1.800</b><span class="text-xs uppercase tracking-wider text-ice/70">Projetos entregues</span></div>
+        <div><b class="display block text-3xl font-extrabold leading-none">4.9★</b><span class="text-xs uppercase tracking-wider text-ice/70">Avaliação dos clientes</span></div>
+      </div>
+    </div>
+    <div class="grid place-items-center">
+      <div class="relative w-full max-w-[420px] rounded-2xl p-7 text-ink" style="background:linear-gradient(180deg,#fff,#eef5fc);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)">
+        <span class="absolute -right-3.5 -top-3.5 w-[70px] h-[70px] rounded-xl -z-10 opacity-90" style="background:#F7941E"></span>
+        <div class="flex justify-between items-center mb-4">
+          <div class="display font-extrabold text-navy">
+            <div class="text-xs text-muted uppercase tracking-[.14em] font-semibold">Ambiente</div>
+            <div class="text-[3.6rem] leading-[.9]">23°</div>
+          </div>
+          <div class="flex gap-1.5"><i class="w-2.5 h-2.5 rounded-full" style="background:#27c08a"></i><i class="w-2.5 h-2.5 rounded-full" style="background:#27c08a"></i><i class="w-2.5 h-2.5 rounded-full bg-ice2"></i></div>
+        </div>
+        <div class="flex flex-col gap-2.5 my-5">
+          <i class="h-2.5 rounded animate-vent block" style="background:linear-gradient(90deg,#D7E7F5,#bcdcf3)"></i>
+          <i class="h-2.5 rounded animate-vent block" style="background:linear-gradient(90deg,#D7E7F5,#bcdcf3);animation-delay:.3s"></i>
+          <i class="h-2.5 rounded animate-vent block" style="background:linear-gradient(90deg,#D7E7F5,#bcdcf3);animation-delay:.6s"></i>
+        </div>
+        <div class="flex gap-2.5 mt-4">
+          <div class="flex-1 bg-ice rounded-xl py-3 text-center"><b class="display block text-xl text-navy font-extrabold">Cool</b><span class="text-[.68rem] text-muted uppercase tracking-wide">Modo</span></div>
+          <div class="flex-1 bg-ice rounded-xl py-3 text-center"><b class="display block text-xl text-navy font-extrabold">Auto</b><span class="text-[.68rem] text-muted uppercase tracking-wide">Vento</span></div>
+          <div class="flex-1 bg-ice rounded-xl py-3 text-center"><b class="display block text-xl text-navy font-extrabold">OK</b><span class="text-[.68rem] text-muted uppercase tracking-wide">Status</span></div>
+        </div>
+        <div class="absolute -left-5 bottom-8 bg-white rounded-xl px-4 py-3 flex items-center gap-3" style="box-shadow:0 18px 50px -22px rgba(10,37,64,.35)">
+          <span class="w-9 h-9 rounded-lg grid place-items-center flex-none" style="background:#F7941E"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="#3a2403"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></span>
+          <div><b class="display block text-navy leading-none text-[1.05rem]">Quadro elétrico</b><span class="text-xs text-muted">Energizado e protegido</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRIP ===== -->
+<div class="bg-white border-b border-line">
+  <div class="max-w-content mx-auto px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="flex items-center gap-3.5 py-6 px-4 border-b sm:border-b-0 lg:border-r border-line">
+      <span class="w-11 h-11 rounded-xl bg-ice grid place-items-center flex-none"><svg class="w-6 h-6" fill="none" stroke="#1B6CB5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+      <div><b class="display font-bold text-navy block leading-tight">Atendimento Local</b><span class="text-sm text-muted">Região metropolitana</span></div>
+    </div>
+    <div class="flex items-center gap-3.5 py-6 px-4 border-b sm:border-b-0 lg:border-r border-line">
+      <span class="w-11 h-11 rounded-xl bg-ice grid place-items-center flex-none"><svg class="w-6 h-6" fill="none" stroke="#1B6CB5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <div><b class="display font-bold text-navy block leading-tight">Resposta Rápida</b><span class="text-sm text-muted">Visita técnica em 24h</span></div>
+    </div>
+    <div class="flex items-center gap-3.5 py-6 px-4 border-b sm:border-b-0 lg:border-r border-line">
+      <span class="w-11 h-11 rounded-xl bg-ice grid place-items-center flex-none"><svg class="w-6 h-6" fill="none" stroke="#1B6CB5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4Z"/></svg></span>
+      <div><b class="display font-bold text-navy block leading-tight">Serviço com Garantia</b><span class="text-sm text-muted">Equipe certificada</span></div>
+    </div>
+    <div class="flex items-center gap-3.5 py-6 px-4">
+      <span class="w-11 h-11 rounded-xl bg-ice grid place-items-center flex-none"><svg class="w-6 h-6" fill="none" stroke="#1B6CB5" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg></span>
+      <div><b class="display font-bold text-navy block leading-tight">Contrato PMOC</b><span class="text-sm text-muted">Manutenção programada</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section id="servicos" class="py-20 lg:py-24">
+  <div class="max-w-content mx-auto px-5">
+    <div class="max-w-2xl mx-auto text-center mb-12 reveal">
+      <span class="eyebrow center text-brand text-[.86rem]">O que fazemos</span>
+      <h2 class="display uppercase font-extrabold text-navy text-4xl lg:text-5xl mt-3 mb-3">Nossos Serviços</h2>
+      <p class="text-muted text-lg">Soluções completas em climatização e elétrica para empresas, indústrias, condomínios e comércios — do projeto à manutenção contínua.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <article class="reveal group relative overflow-hidden bg-white border border-line rounded-2xl p-7 transition hover:-translate-y-1.5 hover:shadow-soft hover:border-transparent">
+        <span class="absolute left-0 top-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" style="background:linear-gradient(90deg,#1B6CB5,#F7941E)"></span>
+        <div class="w-14 h-14 rounded-2xl bg-ice grid place-items-center mb-4 transition group-hover:bg-navy"><svg class="w-7 h-7 group-hover:stroke-amber transition" fill="none" stroke="#1B6CB5" stroke-width="1.7" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="9" rx="2"/><path d="M6 18v2M12 18v3M18 18v2M5 10h6"/></svg></div>
+        <h3 class="display uppercase text-2xl font-bold text-navy mb-2.5">Instalação de Ar Condicionado</h3>
+        <p class="text-muted text-[.96rem] mb-4">Dimensionamento correto e instalação de Split, multi-split, cassete e VRF com infraestrutura adequada.</p>
+        <ul class="flex flex-col gap-2 text-sm">
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Split, Inverter e VRF</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Tubulação e flangeamento</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Teste de vácuo e estanqueidade</li>
+        </ul>
+      </article>
+
+      <article class="reveal group relative overflow-hidden bg-white border border-line rounded-2xl p-7 transition hover:-translate-y-1.5 hover:shadow-soft hover:border-transparent">
+        <span class="absolute left-0 top-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" style="background:linear-gradient(90deg,#1B6CB5,#F7941E)"></span>
+        <div class="w-14 h-14 rounded-2xl bg-ice grid place-items-center mb-4 transition group-hover:bg-navy"><svg class="w-7 h-7 group-hover:stroke-amber transition" fill="none" stroke="#1B6CB5" stroke-width="1.7" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6 6 2 2 6-6a4 4 0 0 0 5.4-5.4l-2.3 2.3-1.4-1.4 2.3-2.3z"/></svg></div>
+        <h3 class="display uppercase text-2xl font-bold text-navy mb-2.5">Manutenção & Limpeza</h3>
+        <p class="text-muted text-[.96rem] mb-4">Manutenção preventiva e corretiva que prolonga a vida útil do equipamento e reduz o consumo de energia.</p>
+        <ul class="flex flex-col gap-2 text-sm">
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Limpeza química completa</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Recarga de gás e reparo</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Contrato PMOC para empresas</li>
+        </ul>
+      </article>
+
+      <article class="reveal group relative overflow-hidden bg-white border border-line rounded-2xl p-7 transition hover:-translate-y-1.5 hover:shadow-soft hover:border-transparent">
+        <span class="absolute left-0 top-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" style="background:linear-gradient(90deg,#1B6CB5,#F7941E)"></span>
+        <div class="w-14 h-14 rounded-2xl bg-ice grid place-items-center mb-4 transition group-hover:bg-navy"><svg class="w-7 h-7 group-hover:stroke-amber transition" fill="none" stroke="#1B6CB5" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 13h4l2 6 4-14 2 8h6"/></svg></div>
+        <h3 class="display uppercase text-2xl font-bold text-navy mb-2.5">Climatização Comercial</h3>
+        <p class="text-muted text-[.96rem] mb-4">Projetos de conforto térmico para lojas, escritórios, restaurantes, clínicas e salas técnicas.</p>
+        <ul class="flex flex-col gap-2 text-sm">
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Cálculo de carga térmica</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Sistemas VRF e dutados</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Eficiência energética</li>
+        </ul>
+      </article>
+
+      <article class="reveal group relative overflow-hidden bg-white border border-line rounded-2xl p-7 transition hover:-translate-y-1.5 hover:shadow-soft hover:border-transparent">
+        <span class="absolute left-0 top-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" style="background:linear-gradient(90deg,#1B6CB5,#F7941E)"></span>
+        <div class="w-14 h-14 rounded-2xl bg-ice grid place-items-center mb-4 transition group-hover:bg-navy"><svg class="w-7 h-7" viewBox="0 0 24 24" fill="#1B6CB5"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div>
+        <h3 class="display uppercase text-2xl font-bold text-navy mb-2.5">Elétrica Industrial</h3>
+        <p class="text-muted text-[.96rem] mb-4">Instalações de média e baixa tensão com segurança, conformidade às normas e máxima continuidade operacional.</p>
+        <ul class="flex flex-col gap-2 text-sm">
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Quadros e painéis de comando</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Aterramento e SPDA</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Laudos e NR-10 / NR-12</li>
+        </ul>
+      </article>
+
+      <article class="reveal group relative overflow-hidden bg-white border border-line rounded-2xl p-7 transition hover:-translate-y-1.5 hover:shadow-soft hover:border-transparent">
+        <span class="absolute left-0 top-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" style="background:linear-gradient(90deg,#1B6CB5,#F7941E)"></span>
+        <div class="w-14 h-14 rounded-2xl bg-ice grid place-items-center mb-4 transition group-hover:bg-navy"><svg class="w-7 h-7 group-hover:stroke-amber transition" fill="none" stroke="#1B6CB5" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6M8 11h2M14 11h2"/></svg></div>
+        <h3 class="display uppercase text-2xl font-bold text-navy mb-2.5">Elétrica Comercial</h3>
+        <p class="text-muted text-[.96rem] mb-4">Projeto e execução de instalações elétricas seguras para comércios, escritórios e edifícios.</p>
+        <ul class="flex flex-col gap-2 text-sm">
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Padrão de entrada e quadros</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Iluminação e tomadas</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Manutenção preventiva</li>
+        </ul>
+      </article>
+
+      <article class="reveal group relative overflow-hidden bg-white border border-line rounded-2xl p-7 transition hover:-translate-y-1.5 hover:shadow-soft hover:border-transparent">
+        <span class="absolute left-0 top-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" style="background:linear-gradient(90deg,#1B6CB5,#F7941E)"></span>
+        <div class="w-14 h-14 rounded-2xl bg-ice grid place-items-center mb-4 transition group-hover:bg-navy"><svg class="w-7 h-7 group-hover:stroke-amber transition" fill="none" stroke="#1B6CB5" stroke-width="1.7" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 class="display uppercase text-2xl font-bold text-navy mb-2.5">Projetos & Consultoria</h3>
+        <p class="text-muted text-[.96rem] mb-4">Acompanhamento técnico, projetos executivos e adequação de instalações às normas vigentes.</p>
+        <ul class="flex flex-col gap-2 text-sm">
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Projeto e ART/RRT</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Adequação às normas</li>
+          <li class="flex items-start gap-2.5"><svg class="w-4 h-4 fill-amber flex-none mt-[3px]" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Gestão de obra</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY ===== -->
+<section class="py-20 lg:py-24 text-white" style="background:linear-gradient(160deg,#0A2540,#0E3155)">
+  <div class="max-w-content mx-auto px-5">
+    <div class="max-w-2xl mx-auto text-center mb-12 reveal">
+      <span class="eyebrow center text-brandsoft text-[.86rem]">Por que a ClimaVolt</span>
+      <h2 class="display uppercase font-extrabold text-4xl lg:text-5xl mt-3 mb-3">Confiança que se mede no resultado</h2>
+      <p class="text-ice/80 text-lg">Trabalhamos para que o ar e a energia da sua operação simplesmente funcionem — todos os dias, sem surpresas.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="reveal border border-white/10 rounded-2xl p-7" style="background:rgba(255,255,255,.05)"><div class="display font-extrabold text-lg text-amber tracking-[.16em] mb-3.5">01</div><h3 class="display uppercase font-bold text-xl mb-2">Equipe Certificada</h3><p class="text-ice/80 text-sm">Técnicos treinados, com NR-10 e NR-35, seguindo rigorosos padrões de segurança.</p></div>
+      <div class="reveal border border-white/10 rounded-2xl p-7" style="background:rgba(255,255,255,.05)"><div class="display font-extrabold text-lg text-amber tracking-[.16em] mb-3.5">02</div><h3 class="display uppercase font-bold text-xl mb-2">Agilidade Real</h3><p class="text-ice/80 text-sm">Visita técnica em até 24h e atendimento de urgência para contratos ativos.</p></div>
+      <div class="reveal border border-white/10 rounded-2xl p-7" style="background:rgba(255,255,255,.05)"><div class="display font-extrabold text-lg text-amber tracking-[.16em] mb-3.5">03</div><h3 class="display uppercase font-bold text-xl mb-2">Transparência</h3><p class="text-ice/80 text-sm">Orçamento claro, sem custos ocultos, e relatório técnico de cada serviço.</p></div>
+      <div class="reveal border border-white/10 rounded-2xl p-7" style="background:rgba(255,255,255,.05)"><div class="display font-extrabold text-lg text-amber tracking-[.16em] mb-3.5">04</div><h3 class="display uppercase font-bold text-xl mb-2">Garantia</h3><p class="text-ice/80 text-sm">Garantia em serviços e peças, com suporte pós-atendimento dedicado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="sobre" class="py-20 lg:py-24">
+  <div class="max-w-content mx-auto px-5 grid lg:grid-cols-2 gap-12 lg:gap-14 items-center">
+    <div class="relative reveal">
+      <div class="relative rounded-2xl overflow-hidden aspect-[4/3] grid place-items-center" style="background:linear-gradient(150deg,#1B6CB5,#0A2540);box-shadow:0 18px 50px -22px rgba(10,37,64,.35)">
+        <svg class="w-[46%] opacity-90" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.2"><rect x="2" y="6" width="20" height="8" rx="2"/><path d="M6 18v2M12 18v3M18 18v2M5 10h7"/></svg>
+        <div class="absolute inset-x-0 bottom-0 p-5 display uppercase tracking-wide font-semibold text-white" style="background:linear-gradient(transparent,rgba(10,37,64,.85))">Equipe técnica ClimaVolt em campo</div>
+      </div>
+      <div class="absolute -right-2 -top-4 rounded-2xl px-6 py-4 text-center display text-[#3a2403]" style="background:#F7941E;box-shadow:0 18px 50px -22px rgba(10,37,64,.35)"><b class="text-[2.6rem] font-extrabold block leading-[.9]">12</b><span class="text-xs uppercase tracking-wider font-semibold">Anos de<br>experiência</span></div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow text-brand text-[.86rem]">Quem Somos</span>
+      <h2 class="display uppercase font-extrabold text-navy text-3xl lg:text-5xl mt-3 mb-4">Especialistas em clima e energia para a sua operação</h2>
+      <p class="text-muted mb-3.5">A ClimaVolt nasceu da união de duas especialidades que andam lado a lado: a climatização e a elétrica. Atendemos indústrias, comércios e edifícios que não podem parar, oferecendo desde a instalação de um único equipamento até a gestão completa de manutenção e projetos elétricos.</p>
+      <p class="text-muted mb-3.5">Nossa missão é simples: entregar ambientes confortáveis e instalações elétricas seguras, com responsabilidade técnica e atendimento próximo do cliente.</p>
+      <ul class="grid sm:grid-cols-2 gap-3 my-6">
+        <li class="flex items-start gap-2.5 font-medium text-[.95rem]"><svg class="w-5 h-5 fill-brand flex-none mt-0.5" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Responsável técnico habilitado</li>
+        <li class="flex items-start gap-2.5 font-medium text-[.95rem]"><svg class="w-5 h-5 fill-brand flex-none mt-0.5" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Atendimento a contratos PMOC</li>
+        <li class="flex items-start gap-2.5 font-medium text-[.95rem]"><svg class="w-5 h-5 fill-brand flex-none mt-0.5" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Conformidade com as NRs</li>
+        <li class="flex items-start gap-2.5 font-medium text-[.95rem]"><svg class="w-5 h-5 fill-brand flex-none mt-0.5" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Materiais de primeira linha</li>
+      </ul>
+      <a href="#contato" class="inline-flex items-center gap-2 display uppercase tracking-wider font-bold px-7 py-3.5 rounded-lg text-white hover:-translate-y-0.5 transition" style="background:#0A2540">Fale com a nossa equipe</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DICAS / MANUTENÇÃO ===== -->
+<section class="py-20 lg:py-24 bg-white border-y border-line">
+  <div class="max-w-content mx-auto px-5 grid lg:grid-cols-2 gap-12 lg:gap-16">
+    <div class="reveal">
+      <span class="eyebrow text-brand text-[.86rem]">Dicas para Ar Condicionado</span>
+      <h2 class="display uppercase font-extrabold text-navy text-3xl lg:text-4xl mt-3 mb-6">Aproveite melhor o seu equipamento</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <span class="w-9 h-9 rounded-lg bg-ice grid place-items-center flex-none mt-0.5"><svg class="w-5 h-5 fill-amber" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><h3 class="display text-xl font-bold text-navy uppercase mb-1">Antes de comprar</h3><p class="text-muted text-[.96rem]">Para uso prolongado, prefira a tecnologia Inverter — ela ajusta a refrigeração conforme a necessidade do ambiente. Avalie o local da instalação para definir a potência (BTUs) ideal.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-9 h-9 rounded-lg bg-ice grid place-items-center flex-none mt-0.5"><svg class="w-5 h-5 fill-amber" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><h3 class="display text-xl font-bold text-navy uppercase mb-1">Limpe os filtros</h3><p class="text-muted text-[.96rem]">A limpeza periódica dos filtros faz parte da rotina: a poeira acumulada aumenta o consumo de energia e reduz a vida útil do aparelho ao dificultar a passagem do ar.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <span class="w-9 h-9 rounded-lg bg-ice grid place-items-center flex-none mt-0.5"><svg class="w-5 h-5 fill-amber" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><h3 class="display text-xl font-bold text-navy uppercase mb-1">Ajuste a temperatura</h3><p class="text-muted text-[.96rem]">A maioria das pessoas se sente confortável entre 20 °C e 25 °C, sendo 23 °C uma boa média. Lembre-se: o ajuste é a temperatura-alvo do ambiente, não a do ar que sai do aparelho.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal rounded-2xl p-8 lg:p-10 text-white self-start" style="background:linear-gradient(160deg,#1B6CB5,#0A2540)">
+      <span class="eyebrow text-brandsoft text-[.86rem]">Manutenção Preventiva</span>
+      <h2 class="display uppercase font-extrabold text-3xl lg:text-4xl mt-3 mb-4">Evite problemas antes que aconteçam</h2>
+      <p class="text-ice/85 mb-4">Você só percebe o ar condicionado quando algo dá errado? É justamente a manutenção preventiva e periódica que evita panes, mantém o ambiente sempre agradável e garante o máximo desempenho do aparelho ao longo do ano.</p>
+      <p class="text-ice/85 mb-6">Com um contrato PMOC, sua empresa ganha previsibilidade: visitas programadas, relatórios técnicos e menos paradas inesperadas — além de economia na conta de energia.</p>
+      <a href="#contato" class="inline-flex items-center gap-2 display uppercase tracking-wider font-bold px-7 py-3.5 rounded-lg text-[#3a2403] hover:-translate-y-0.5 transition" style="background:#F7941E">Agendar uma visita técnica</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="galeria" class="py-20 lg:py-24">
+  <div class="max-w-content mx-auto px-5">
+    <div class="max-w-2xl mx-auto text-center mb-10 reveal">
+      <span class="eyebrow center text-brand text-[.86rem]">Portfólio</span>
+      <h2 class="display uppercase font-extrabold text-navy text-4xl lg:text-5xl mt-3 mb-3">Projetos Realizados</h2>
+      <p class="text-muted text-lg">Uma amostra do nosso trabalho. Filtre por categoria para ver os tipos de projeto que executamos.</p>
+    </div>
+    <div class="flex flex-wrap gap-2.5 justify-center mb-9 reveal" id="galFilter">
+      <button data-filter="all" class="gal-btn display uppercase tracking-wide font-semibold text-[.95rem] px-5 py-2 rounded-full border-[1.5px] transition" data-active="1" style="background:#0A2540;color:#fff;border-color:#0A2540">Todos</button>
+      <button data-filter="ar" class="gal-btn display uppercase tracking-wide font-semibold text-[.95rem] px-5 py-2 rounded-full border-[1.5px] border-line bg-white text-muted hover:bg-navy hover:text-white hover:border-navy transition">Ar Condicionado</button>
+      <button data-filter="ind" class="gal-btn display uppercase tracking-wide font-semibold text-[.95rem] px-5 py-2 rounded-full border-[1.5px] border-line bg-white text-muted hover:bg-navy hover:text-white hover:border-navy transition">Elétrica Industrial</button>
+      <button data-filter="com" class="gal-btn display uppercase tracking-wide font-semibold text-[.95rem] px-5 py-2 rounded-full border-[1.5px] border-line bg-white text-muted hover:bg-navy hover:text-white hover:border-navy transition">Elétrica Comercial</button>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="galGrid">
+
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="ar" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#1B6CB5,#0A2540)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M2 5h20v9H2z" fill="none" stroke="#fff" stroke-width="1" opacity=".85"/><path d="M6 18v2M12 18v3M18 18v2" stroke="#fff" stroke-width="1" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Ar Condicionado</span><h4 class="display uppercase text-xl font-bold text-white">Split em escritório corporativo</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="ind" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#0A2540,#0E3155)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#fff" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Elétrica Industrial</span><h4 class="display uppercase text-xl font-bold text-white">Painel de comando — galpão fabril</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="com" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#3E8FD4,#134074)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6" fill="none" stroke="#fff" stroke-width="1" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Elétrica Comercial</span><h4 class="display uppercase text-xl font-bold text-white">Padrão de entrada — loja</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="ar" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#1B6CB5,#0A2540)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M2 5h20v9H2z" fill="none" stroke="#fff" stroke-width="1" opacity=".85"/><path d="M6 18v2M12 18v3M18 18v2" stroke="#fff" stroke-width="1" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Ar Condicionado</span><h4 class="display uppercase text-xl font-bold text-white">VRF em restaurante</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="ind" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#0A2540,#0E3155)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#fff" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Elétrica Industrial</span><h4 class="display uppercase text-xl font-bold text-white">Aterramento e SPDA</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="com" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#3E8FD4,#134074)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6" fill="none" stroke="#fff" stroke-width="1" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Elétrica Comercial</span><h4 class="display uppercase text-xl font-bold text-white">Iluminação de showroom</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="ar" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#1B6CB5,#0A2540)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M2 5h20v9H2z" fill="none" stroke="#fff" stroke-width="1" opacity=".85"/><path d="M6 18v2M12 18v3M18 18v2" stroke="#fff" stroke-width="1" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Ar Condicionado</span><h4 class="display uppercase text-xl font-bold text-white">Climatização de sala técnica</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="ind" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#0A2540,#0E3155)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#fff" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Elétrica Industrial</span><h4 class="display uppercase text-xl font-bold text-white">Quadro de distribuição QGBT</h4></div>
+      </div>
+      <div class="gal-item reveal group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer transition hover:-translate-y-1" data-cat="com" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="absolute inset-0 grid place-items-center" style="background:linear-gradient(150deg,#3E8FD4,#134074)"><svg class="w-[34%] opacity-85" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13M9 21v-6h6v6" fill="none" stroke="#fff" stroke-width="1" opacity=".85"/></svg></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-5 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(transparent 40%,rgba(10,37,64,.88))"><span class="display uppercase tracking-[.12em] text-[.74rem] text-amber font-semibold">Elétrica Comercial</span><h4 class="display uppercase text-xl font-bold text-white">Reforma elétrica de clínica</h4></div>
+      </div>
+
+    </div>
+    <p class="text-center text-muted text-sm mt-7">As imagens acima são modelos ilustrativos. Substitua pelos arquivos reais dos seus projetos.</p>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="avaliacoes" class="py-20 lg:py-24" style="background:#E9F2FA">
+  <div class="max-w-content mx-auto px-5">
+    <div class="max-w-2xl mx-auto text-center mb-10 reveal">
+      <span class="eyebrow center text-brand text-[.86rem]">Avaliações</span>
+      <h2 class="display uppercase font-extrabold text-navy text-4xl lg:text-5xl mt-3 mb-3">O que dizem nossos clientes</h2>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-10 reveal">
+      <div class="flex items-center gap-5 bg-white rounded-2xl px-7 py-5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)">
+        <div class="display text-[3.4rem] font-extrabold text-navy leading-[.85]">4.9</div>
+        <div>
+          <div class="text-amber text-xl tracking-widest">★★★★★</div>
+          <div class="text-sm text-muted mt-0.5"><span class="font-bold text-ink">Excelente</span> — baseado em 240+ avaliações</div>
+          <div class="flex items-center gap-1.5 text-xs text-muted mt-1">
+            <svg viewBox="0 0 24 24" class="w-4 h-4"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg>
+            Avaliações verificadas no Google
+          </div>
+        </div>
+      </div>
+      <a href="#contato" class="display uppercase tracking-wider font-bold px-7 py-3.5 rounded-lg text-white hover:-translate-y-0.5 transition" style="background:#0A2540">Seja o próximo cliente satisfeito</a>
+    </div>
+
+    <div class="relative reveal">
+      <div class="overflow-hidden">
+        <div class="rev-track" id="revTrack">
+          <div class="px-2.5 flex-none w-full sm:w-1/2 lg:w-1/3"><article class="bg-white rounded-2xl p-6 h-full flex flex-col gap-3.5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)"><div class="flex items-center justify-between"><div class="text-amber tracking-wide">★★★★★</div><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg></div><p class="text-ink text-[.96rem] flex-1">“Serviço impecável. Instalaram o ar condicionado da loja em um dia e ainda revisaram o quadro elétrico. Equipe pontual e organizada.”</p><div class="flex items-center gap-3 border-t border-line pt-3.5"><span class="w-10 h-10 rounded-full grid place-items-center text-white display font-bold text-lg flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)">M</span><div><b class="block text-[.95rem]">Marcos R.</b><span class="text-xs text-muted">Comércio varejista</span></div></div></article></div>
+          <div class="px-2.5 flex-none w-full sm:w-1/2 lg:w-1/3"><article class="bg-white rounded-2xl p-6 h-full flex flex-col gap-3.5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)"><div class="flex items-center justify-between"><div class="text-amber tracking-wide">★★★★★</div><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg></div><p class="text-ink text-[.96rem] flex-1">“Contratamos o PMOC para a fábrica e a diferença foi enorme: menos paradas e conta de energia mais baixa. Recomendo demais.”</p><div class="flex items-center gap-3 border-t border-line pt-3.5"><span class="w-10 h-10 rounded-full grid place-items-center text-white display font-bold text-lg flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)">A</span><div><b class="block text-[.95rem]">Ana Paula L.</b><span class="text-xs text-muted">Gerente industrial</span></div></div></article></div>
+          <div class="px-2.5 flex-none w-full sm:w-1/2 lg:w-1/3"><article class="bg-white rounded-2xl p-6 h-full flex flex-col gap-3.5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)"><div class="flex items-center justify-between"><div class="text-amber tracking-wide">★★★★★</div><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg></div><p class="text-ink text-[.96rem] flex-1">“Profissionais qualificados e atendimento rápido. Resolveram uma emergência elétrica no escritório no mesmo dia. Nota mil!”</p><div class="flex items-center gap-3 border-t border-line pt-3.5"><span class="w-10 h-10 rounded-full grid place-items-center text-white display font-bold text-lg flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)">C</span><div><b class="block text-[.95rem]">Carlos M.</b><span class="text-xs text-muted">Administrador predial</span></div></div></article></div>
+          <div class="px-2.5 flex-none w-full sm:w-1/2 lg:w-1/3"><article class="bg-white rounded-2xl p-6 h-full flex flex-col gap-3.5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)"><div class="flex items-center justify-between"><div class="text-amber tracking-wide">★★★★★</div><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg></div><p class="text-ink text-[.96rem] flex-1">“Fizeram o projeto de climatização e a parte elétrica da nova clínica. Tudo dentro do prazo e com acabamento caprichado.”</p><div class="flex items-center gap-3 border-t border-line pt-3.5"><span class="w-10 h-10 rounded-full grid place-items-center text-white display font-bold text-lg flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)">J</span><div><b class="block text-[.95rem]">Juliana F.</b><span class="text-xs text-muted">Clínica odontológica</span></div></div></article></div>
+          <div class="px-2.5 flex-none w-full sm:w-1/2 lg:w-1/3"><article class="bg-white rounded-2xl p-6 h-full flex flex-col gap-3.5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)"><div class="flex items-center justify-between"><div class="text-amber tracking-wide">★★★★★</div><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg></div><p class="text-ink text-[.96rem] flex-1">“O VRF instalado deixou o salão muito mais confortável. Manutenção em dia e suporte sempre disponível.”</p><div class="flex items-center gap-3 border-t border-line pt-3.5"><span class="w-10 h-10 rounded-full grid place-items-center text-white display font-bold text-lg flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)">R</span><div><b class="block text-[.95rem]">Roberto S.</b><span class="text-xs text-muted">Restaurante</span></div></div></article></div>
+          <div class="px-2.5 flex-none w-full sm:w-1/2 lg:w-1/3"><article class="bg-white rounded-2xl p-6 h-full flex flex-col gap-3.5" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)"><div class="flex items-center justify-between"><div class="text-amber tracking-wide">★★★★★</div><svg viewBox="0 0 24 24" class="w-5 h-5"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2-1.9 3.3-4.7 3.3-7.9Z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.3-2.7l-3.5-2.7c-1 .7-2.3 1.1-3.8 1.1-2.9 0-5.4-2-6.3-4.7H2.1v2.8A11 11 0 0 0 12 23Z"/><path fill="#FBBC05" d="M5.7 14a6.6 6.6 0 0 1 0-4.2V7H2.1a11 11 0 0 0 0 9.9L5.7 14Z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.1 7l3.6 2.8C6.6 7.1 9.1 5.4 12 5.4Z"/></svg></div><p class="text-ink text-[.96rem] flex-1">“Atendimento transparente, orçamento sem surpresas e técnicos educados. Virou nosso fornecedor fixo.”</p><div class="flex items-center gap-3 border-t border-line pt-3.5"><span class="w-10 h-10 rounded-full grid place-items-center text-white display font-bold text-lg flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)">P</span><div><b class="block text-[.95rem]">Patrícia D.</b><span class="text-xs text-muted">Escritório de advocacia</span></div></div></article></div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-4 mt-7">
+        <button id="revPrev" class="w-11 h-11 rounded-full bg-white grid place-items-center hover:bg-navy hover:text-white transition" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)" aria-label="Anterior"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div id="revDots" class="flex gap-2"></div>
+        <button id="revNext" class="w-11 h-11 rounded-full bg-white grid place-items-center hover:bg-navy hover:text-white transition" style="box-shadow:0 8px 24px -14px rgba(10,37,64,.28)" aria-label="Próxima"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contato" class="py-20 lg:py-24 text-white" style="background:linear-gradient(160deg,#0A2540,#0E3155)">
+  <div class="max-w-content mx-auto px-5 grid lg:grid-cols-[1fr_1.05fr] gap-12">
+    <div class="reveal">
+      <span class="eyebrow text-brandsoft text-[.86rem]">Contato</span>
+      <h2 class="display uppercase font-extrabold text-4xl lg:text-5xl mt-3 mb-3">Solicite seu orçamento</h2>
+      <p class="text-ice/80 text-lg mb-8">Conte o que você precisa e retornamos rápido com a melhor solução. Atendimento para empresas, indústrias e comércios.</p>
+      <div class="flex flex-col gap-4 mb-2">
+        <div class="flex gap-4 items-start">
+          <span class="w-11 h-11 rounded-xl grid place-items-center flex-none" style="background:rgba(255,255,255,.1)"><svg class="w-5 h-5" fill="none" stroke="#F7941E" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2 4.6.6V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h4.2l.6 4.6-2.2 2.2Z"/></svg></span>
+          <div><b class="display uppercase tracking-wide text-[1.02rem] block">Telefone / WhatsApp</b><span class="text-ice/80">(00) 0000-0000</span></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <span class="w-11 h-11 rounded-xl grid place-items-center flex-none" style="background:rgba(255,255,255,.1)"><svg class="w-5 h-5" fill="none" stroke="#F7941E" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <div><b class="display uppercase tracking-wide text-[1.02rem] block">E-mail</b><span class="text-ice/80">contato@climavolt.com.br</span></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <span class="w-11 h-11 rounded-xl grid place-items-center flex-none" style="background:rgba(255,255,255,.1)"><svg class="w-5 h-5" fill="none" stroke="#F7941E" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+          <div><b class="display uppercase tracking-wide text-[1.02rem] block">Endereço</b><span class="text-ice/80">Sua cidade — atendemos toda a região</span></div>
+        </div>
+      </div>
+      <div class="border border-white/10 rounded-2xl px-6 py-5 mt-6" style="background:rgba(255,255,255,.05)">
+        <b class="display uppercase tracking-wider block mb-1.5">Horário de Atendimento</b>
+        <span class="text-ice/80 text-[.92rem]">Segunda a sexta: 08h – 18h &nbsp;•&nbsp; Sábado: 08h – 12h<br>Urgências para contratos ativos: 24h</span>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 text-ink reveal" style="box-shadow:0 18px 50px -22px rgba(10,37,64,.35)">
+      <h3 class="display uppercase text-2xl font-bold text-navy">Peça seu orçamento</h3>
+      <p class="text-muted text-[.92rem] mb-6">Preencha os campos e envie. A mensagem abre direto no WhatsApp para resposta imediata.</p>
+      <form id="orcForm" novalidate class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-navy mb-1.5" for="nome">Nome*</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome" class="w-full px-3.5 py-3 rounded-xl border-[1.5px] border-line text-ink focus:outline-none focus:border-brand transition" style="background:#fbfdff">
+            <p class="hidden text-xs mt-1" style="color:#d23a55" data-err="nome">Informe seu nome.</p>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-navy mb-1.5" for="tel">Telefone*</label>
+            <input id="tel" name="tel" type="tel" placeholder="(00) 00000-0000" class="w-full px-3.5 py-3 rounded-xl border-[1.5px] border-line text-ink focus:outline-none focus:border-brand transition" style="background:#fbfdff">
+            <p class="hidden text-xs mt-1" style="color:#d23a55" data-err="tel">Informe um telefone.</p>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wide text-navy mb-1.5" for="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="voce@email.com" class="w-full px-3.5 py-3 rounded-xl border-[1.5px] border-line text-ink focus:outline-none focus:border-brand transition" style="background:#fbfdff">
+          <p class="hidden text-xs mt-1" style="color:#d23a55" data-err="email">E-mail inválido.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wide text-navy mb-1.5" for="servico">Serviço desejado*</label>
+          <select id="servico" name="servico" class="w-full px-3.5 py-3 rounded-xl border-[1.5px] border-line text-ink focus:outline-none focus:border-brand transition" style="background:#fbfdff">
+            <option value="">Selecione...</option>
+            <option>Instalação de ar condicionado</option>
+            <option>Manutenção / limpeza de ar condicionado</option>
+            <option>Climatização comercial / industrial</option>
+            <option>Elétrica industrial</option>
+            <option>Elétrica comercial</option>
+            <option>Projeto / consultoria</option>
+            <option>Outro</option>
+          </select>
+          <p class="hidden text-xs mt-1" style="color:#d23a55" data-err="servico">Selecione um serviço.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wide text-navy mb-1.5" for="msg">Detalhes do projeto</label>
+          <textarea id="msg" name="msg" rows="4" placeholder="Conte sobre o que você precisa, local, quantidade de equipamentos, etc." class="w-full px-3.5 py-3 rounded-xl border-[1.5px] border-line text-ink focus:outline-none focus:border-brand transition resize-y" style="background:#fbfdff"></textarea>
+        </div>
+        <button type="submit" class="w-full display uppercase tracking-wider font-bold text-[1.02rem] px-7 py-3.5 rounded-xl text-[#3a2403] transition flex items-center justify-center gap-2.5" style="background:#F7941E;box-shadow:0 10px 24px -10px rgba(247,148,30,.7)">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#3a2403"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.4-.9-2.9-1.2-4.7-4.2-4.8-4.4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.4.4-.2.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.7-.9c.2-.3.4-.2.6-.1l1.9.9c.3.2.5.2.5.4.1.2.1.9-.1 1.4Z"/></svg>
+          Enviar pelo WhatsApp
+        </button>
+        <p class="text-xs text-muted text-center">Ao enviar, abriremos o WhatsApp com sua mensagem pronta.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="text-[#9fb4cb] pt-14" style="background:#071A2E">
+  <div class="max-w-content mx-auto px-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-9 pb-11">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-10 h-10 rounded-xl grid place-items-center flex-none" style="background:linear-gradient(135deg,#1B6CB5,#0A2540)"><svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#F7941E"/></svg></span>
+          <b class="display text-2xl font-extrabold tracking-wide text-white uppercase">ClimaVolt</b>
+        </div>
+        <p class="text-[.92rem] mb-4 max-w-xs">Climatização e elétrica industrial e comercial. Conforto térmico e energia segura para a sua operação.</p>
+        <div class="flex gap-2.5">
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg grid place-items-center hover:opacity-80 transition" style="background:rgba(255,255,255,.07)"><svg class="w-[18px] h-[18px]" fill="#cfe0f1" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.8 3.8 0 0 1-1.4-.9 3.8 3.8 0 0 1-.9-1.4c-.1-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1Zm0 3.6a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4Zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg></a>
+          <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-lg grid place-items-center hover:opacity-80 transition" style="background:rgba(255,255,255,.07)"><svg class="w-[18px] h-[18px]" fill="#cfe0f1" viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.3-1.5 1.6-1.5h1.6V3.6c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.3H7.7V13h2.8v8h3Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp" class="w-9 h-9 rounded-lg grid place-items-center hover:opacity-80 transition" style="background:rgba(255,255,255,.07)"><svg class="w-[18px] h-[18px]" fill="#cfe0f1" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.4-.9-2.9-1.2-4.7-4.2-4.8-4.4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.4.4-.2.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.7-.9c.2-.3.4-.2.6-.1l1.9.9c.3.2.5.2.5.4.1.2.1.9-.1 1.4Z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="display text-white uppercase tracking-wider text-[1.05rem] mb-4">Serviços</h4>
+        <ul class="flex flex-col gap-2.5 text-[.92rem]">
+          <li><a href="#servicos" class="hover:text-amber transition">Instalação de AC</a></li>
+          <li><a href="#servicos" class="hover:text-amber transition">Manutenção & Limpeza</a></li>
+          <li><a href="#servicos" class="hover:text-amber transition">Climatização Comercial</a></li>
+          <li><a href="#servicos" class="hover:text-amber transition">Elétrica Industrial</a></li>
+          <li><a href="#servicos" class="hover:text-amber transition">Elétrica Comercial</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="display text-white uppercase tracking-wider text-[1.05rem] mb-4">Empresa</h4>
+        <ul class="flex flex-col gap-2.5 text-[.92rem]">
+          <li><a href="#sobre" class="hover:text-amber transition">Quem Somos</a></li>
+          <li><a href="#galeria" class="hover:text-amber transition">Projetos</a></li>
+          <li><a href="#avaliacoes" class="hover:text-amber transition">Avaliações</a></li>
+          <li><a href="#contato" class="hover:text-amber transition">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="display text-white uppercase tracking-wider text-[1.05rem] mb-4">Contato</h4>
+        <ul class="flex flex-col gap-2.5 text-[.92rem]">
+          <li><a href="tel:+5500000000000" class="hover:text-amber transition">(00) 0000-0000</a></li>
+          <li><a href="mailto:contato@climavolt.com.br" class="hover:text-amber transition">contato@climavolt.com.br</a></li>
+          <li>Seg–Sex: 08h às 18h</li>
+          <li>Sáb: 08h às 12h</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5 text-center text-sm">
+    <div class="max-w-content mx-auto px-5">© <span id="ano"></span> ClimaVolt Climatização & Elétrica. Todos os direitos reservados. &nbsp;·&nbsp; <span style="color:#6f86a0">CNPJ 00.000.000/0001-00</span></div>
+  </div>
+</footer>
+
+<!-- ===== FLOATING WHATSAPP ===== -->
+<a id="wppBtn" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" class="fixed right-5 bottom-5 z-[60] w-[60px] h-[60px] rounded-full grid place-items-center animate-pulse2" style="background:#25D366;box-shadow:0 12px 30px -8px rgba(37,211,102,.6)">
+  <svg class="w-8 h-8" fill="#fff" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.4-.9-2.9-1.2-4.7-4.2-4.8-4.4-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.4.4-.2.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.7-.9c.2-.3.4-.2.6-.1l1.9.9c.3.2.5.2.5.4.1.2.1.9-.1 1.4Z"/></svg>
+</a>
+
+<script>
+(function(){
+  "use strict";
+  /* ===== CONFIG — ALTERE AQUI ===== */
+  var WHATSAPP_NUMERO = "5500000000000"; // DDI+DDD+número, só dígitos. Ex: 5511999998888
+
+  function $(s,ctx){ return (ctx||document).querySelector(s); }
+  function $all(s,ctx){ return Array.prototype.slice.call((ctx||document).querySelectorAll(s)); }
+  function safe(fn){ try{ fn(); }catch(e){ console.warn(e); } }
+
+  /* ano */
+  safe(function(){ var a=$('#ano'); if(a) a.textContent = new Date().getFullYear(); });
+
+  /* header shadow */
+  safe(function(){
+    var header = $('[data-header]');
+    if(!header) return;
+    addEventListener('scroll', function(){ header.classList.toggle('scrolled-shadow', scrollY > 20); });
+  });
+
+  /* whatsapp float */
+  safe(function(){
+    var b=$('#wppBtn'); if(b) b.href='https://wa.me/'+WHATSAPP_NUMERO+'?text='+encodeURIComponent('Olá! Vim pelo site e gostaria de um orçamento.');
+  });
+
+  /* mobile menu */
+  safe(function(){
+    var burger=$('[data-burger]'), mm=$('[data-mm]'), bars=$all('[data-bar]');
+    if(!burger||!mm) return;
+    function toggle(open){
+      mm.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+      if(bars[0]) bars[0].style.transform = open ? 'translateY(7.5px) rotate(45deg)' : '';
+      if(bars[1]) bars[1].style.opacity = open ? '0' : '1';
+      if(bars[2]) bars[2].style.transform = open ? 'translateY(-7.5px) rotate(-45deg)' : '';
+    }
+    burger.addEventListener('click', function(){ toggle(!mm.classList.contains('open')); });
+    $all('a',mm).forEach(function(a){ a.addEventListener('click', function(){ toggle(false); }); });
+  });
+
+  /* galeria filtro */
+  safe(function(){
+    var btns=$all('#galFilter .gal-btn'), items=$all('.gal-item');
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        btns.forEach(function(x){
+          x.removeAttribute('data-active');
+          x.style.background='#fff'; x.style.color='#5C6E80'; x.style.borderColor='#DCE6F0';
+        });
+        b.setAttribute('data-active','1');
+        b.style.background='#0A2540'; b.style.color='#fff'; b.style.borderColor='#0A2540';
+        var f=b.getAttribute('data-filter');
+        items.forEach(function(it){
+          it.classList.toggle('is-hidden', !(f==='all' || it.getAttribute('data-cat')===f));
+        });
+      });
+    });
+  });
+
+  /* avaliações slider */
+  safe(function(){
+    var track=$('#revTrack'), dotsWrap=$('#revDots'), prev=$('#revPrev'), next=$('#revNext');
+    if(!track) return;
+    var total = $all('> div', track).length || track.children.length;
+    var perView=3, page=0, pages=1, autoT;
+    function calc(){ return innerWidth<640?1: innerWidth<1024?2:3; }
+    function buildDots(){
+      pages=Math.ceil(total/perView); page=Math.min(page,pages-1);
+      if(!dotsWrap) return;
+      dotsWrap.innerHTML='';
+      for(var i=0;i<pages;i++){
+        var d=document.createElement('button');
+        d.setAttribute('data-dot',i);
+        d.className='rounded-full transition';
+        d.style.height='10px';
+        d.style.width = i===page?'24px':'10px';
+        d.style.background = i===page?'#0A2540':'rgba(10,37,64,.25)';
+        (function(idx){ d.addEventListener('click', function(){ page=idx; update(); }); })(i);
+        dotsWrap.appendChild(d);
+      }
+    }
+    function update(){
+      track.style.transform='translateX(-'+(page*100)+'%)';
+      if(dotsWrap) $all('[data-dot]',dotsWrap).forEach(function(d,i){
+        d.style.width = i===page?'24px':'10px';
+        d.style.background = i===page?'#0A2540':'rgba(10,37,64,.25)';
+      });
+    }
+    function go(dir){ page=(page+dir+pages)%pages; update(); }
+    function setup(){ perView=calc(); buildDots(); update(); }
+    function reset(){ clearInterval(autoT); autoT=setInterval(function(){ go(1); }, 6000); }
+    if(next) next.addEventListener('click', function(){ go(1); reset(); });
+    if(prev) prev.addEventListener('click', function(){ go(-1); reset(); });
+    var sec=$('#avaliacoes');
+    if(sec){ sec.addEventListener('mouseenter', function(){ clearInterval(autoT); }); sec.addEventListener('mouseleave', reset); }
+    addEventListener('resize', setup);
+    setup(); reset();
+  });
+
+  /* formulário -> whatsapp */
+  safe(function(){
+    var form=$('#orcForm'); if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var f=form.elements, ok=true;
+      function show(name,cond){
+        var el=f[name], msg=form.querySelector('[data-err="'+name+'"]');
+        if(el) el.style.borderColor = cond ? '#DCE6F0' : '#e0506a';
+        if(msg) msg.classList.toggle('hidden', cond);
+        if(!cond) ok=false;
+      }
+      show('nome', f.nome.value.trim().length>1);
+      show('tel', f.tel.value.replace(/\D/g,'').length>=8);
+      show('servico', f.servico.value!=='');
+      if(f.email.value.trim()!=='') show('email', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value));
+      if(!ok) return;
+      var txt='*Novo pedido de orçamento — site ClimaVolt*\n'+
+        '*Nome:* '+f.nome.value+'\n'+
+        '*Telefone:* '+f.tel.value+'\n'+
+        '*E-mail:* '+(f.email.value||'—')+'\n'+
+        '*Serviço:* '+f.servico.value+'\n'+
+        '*Detalhes:* '+(f.msg.value||'—');
+      window.open('https://wa.me/'+WHATSAPP_NUMERO+'?text='+encodeURIComponent(txt), '_blank');
+    });
+  });
+
+  /* reveal on scroll + failsafe */
+  safe(function(){
+    var els=$all('.reveal');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, {threshold:.1});
+      els.forEach(function(el){ io.observe(el); });
+    } else {
+      els.forEach(function(el){ el.classList.add('in'); });
+    }
+  });
+  /* garante que tudo apareça mesmo se algo falhar */
+  addEventListener('load', function(){ setTimeout(function(){ $all('.reveal').forEach(function(el){ el.classList.add('in'); }); }, 300); });
+})();
+</script>
+</body>
+</html>
